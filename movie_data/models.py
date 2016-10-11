@@ -31,6 +31,13 @@ class Movie(models.Model):
     def __str__(self):
         return self.movie_title
 
+    def ave_rating(self):
+        return Rating.objects.filter(movie=self).aggregate(average_rating=Avg('rating'))
+
+    def top_rating(self):
+        return
+
+
 
 class Rater(models.Model):
     #raterid = models.IntegerField(primary_key=True)
@@ -42,6 +49,10 @@ class Rater(models.Model):
     def __str__(self):
         return str(self.id)
 
+    def ave_rating(self):
+        return Rating.objects.filter(rater=self).aggregate(Avg('rating'))
+
+
 
 class Rating(models.Model):
     rater = models.ForeignKey(Rater)
@@ -52,7 +63,3 @@ class Rating(models.Model):
     def __str__(self):
         return str(self.movie)
         return str(self.rating)
-
-    def ave_rating():
-        movie_ave_rating = [Rating.objects.filter(movie=x).aggregate(Avg('rating')) for x in range(1,1683)]
-        return movie_ave_rating

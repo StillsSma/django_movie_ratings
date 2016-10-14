@@ -5,12 +5,19 @@
     <title></title>
   </head>
   <body>
-      <h1>This movie right here</h1>
+      <h1>{{ movie.movie_title }}</h1>
       <p>
           <p>
-            {{ movie.movie_title }}
+
             {{ movie.ave_rating }}
-            {{movie.user}}
+            <p>
+              {%for ratings in raters%}
+                {{ratings.rater}}
+                <a href="/user_info/{{ ratings.rater.id }}">user</a>
+
+              {% endfor %}
+            </p>
+
 
 
       </p>

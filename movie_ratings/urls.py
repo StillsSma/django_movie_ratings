@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^movie/2/$', all_movies_view),
     url(r'^movie_info/(?P<movie_id>\d+)/$', movie_page_view),
     url(r'^movie/3/$', all_users_view),
-    url(r'^user_info/(?P<user_id>\d+)/$', user_page_view),
+    url(r'^user_info/(?P<rater_id>\d+)/$', user_page_view),
 
 
 

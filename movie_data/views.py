@@ -14,8 +14,8 @@ def index_view(request):
 def top_20_view(request):
     context = {
 
-    "20_movies": "movies"
-    }
+    "20_movies": Movie.objects.annotate(average= Avg('rating__rating')).order_by('-average')[:20]
+    }                                            # WHY Does __ work here? What is it doing? 
 
     return render(request, "top_20.html", context)
 
@@ -35,14 +35,15 @@ def all_users_view(request):
 
 def movie_page_view(request, movie_id):
     context = {
-    "movie" : Movie.objects.get(id=movie_id)
+    "movie" : Movie.objects.get(id=movie_id),
+    "raters": Rating.objects.filter(movie=movie_id).order_by('rater')
 
     }
     return render(request, "movie_page.html", context)
 
-def user_page_view(request, user_id):
+def user_page_view(request, rater_id):
     context = {
-    "user" : Rater.objects.get(id=user_id)
-
+    "rater" : Rater.objects.get(id=rater_id),
+    "movies_rated": Rating.objects.filter(rater=rater_id).order_by('movie')
     }
     return render(request, "user_page.html", context)

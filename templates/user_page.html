@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-      <h1>This user right here</h1>
+      <h1>User {{rater.id}}</h1>
       <p>
           <p>
             age : {{ user.age}}
@@ -14,6 +14,11 @@
             zipcode: {{user.zipcode}}
 
 
+      </p>
+      <p>
+        {%for movies in movies_rated%}
+        <a href="/movie_info/{{ movies.movie.id }}">{{movies}}</a>- {{movies.rating}}
+        {% endfor %}
       </p>
   </body>
 </html>
